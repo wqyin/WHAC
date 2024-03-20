@@ -3,7 +3,7 @@
 
 <div align="center">
     <a href="https://wqyin.github.io/projects/WHAC/" class="button"><b>[Homepage]</b></a> &nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="https://arxiv.org/" class="button"><b>[arXiv]</b></a> &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://arxiv.org/abs/2403.12959" class="button"><b>[arXiv]</b></a> &nbsp;&nbsp;&nbsp;&nbsp;
     <a href="https://github.com/caizhongang/SMPLer-X" class="button"><b>[SMPLer-X]</b></a> &nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 

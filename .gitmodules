@@ -1,0 +1,7 @@
+[submodule "third_party/DPVO"]
+    path = third_party/DPVO
+    url = https://github.com/princeton-vl/DPVO.git
+
+[submodule "third_party/SMPLest-X"]
+    path = third_party/SMPLest-X
+    url = https://github.com/wqyin/SMPLest-X.git

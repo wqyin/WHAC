@@ -1,1 +1,10 @@
-.DS_Store
+pretrained_models
+demo
+outputs
+*.txt
+*.txt.1
+*.pyc
+**/__pycache__
+**/.DS_Store
+**/human_model_files
+wget-log

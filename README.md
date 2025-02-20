@@ -2,8 +2,6 @@
 
 This is the official implementation of [**WHAC: World-grounded Humans and Cameras (ECCV 2024)**](https://eccv.ecva.net/virtual/2024/poster/1710), featuring the latest foundation model for human pose and shape estimation with [**SMPLest-X**](https://arxiv.org/abs/2501.09782).
 
-![Teaser](./assets/whac_teaser.jpg)
-
 <div align="center">
     <a href="https://wqyin.github.io/projects/WHAC/" class="button"><b>[Homepage]</b></a> &nbsp;&nbsp;&nbsp;&nbsp;
     <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/04945.pdf" class="button"><b>[Paper]</b></a> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -13,6 +11,16 @@ This is the official implementation of [**WHAC: World-grounded Humans and Camera
 </div>
 
 ---
+
+<p align="center">
+  <img src="./assets/whac_teaser.png" width="98.2%" />
+  <img src="./assets/skateboard_demo_result.gif" width="32.5%" />
+  <img src="./assets/office_demo_result.gif" width="32.5%" />
+  <img src="./assets/dance_demo_restult.gif" width="32.5%" />
+</p>
+
+---
+
 ## Installation
 
 #### **Prepare the environment**
@@ -63,8 +71,13 @@ bash scripts/installation.sh
 - Place the video under `./demo` folder.
 ```
 bash scripts/inference.sh {SEQ_NAME}
+```
+- You may quick run the demo with our test videos by:
+```
+bash scripts/prepare_demo.sh
 
-e.g. bash scripts/inference.sh dance.mp4
+bash scripts/inference.sh dance_demo.mp4
+bash scripts/inference.sh skateboard_demo.mp4
 ```
 
 ## WHAC-A-Mole

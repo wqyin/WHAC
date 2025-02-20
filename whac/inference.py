@@ -54,8 +54,8 @@ def main():
         os.makedirs(mesh_path, exist_ok=True)
 
     # =============smplestx=============
-    smplestx_config_path = './third_party/SMPLest-X/pretrained_models/smplest_x_h40/config_base.py'
-    smplestx_ckpt_path = './third_party/SMPLest-X/pretrained_models/smplest_x_h40/smplest_x_h40.pth.tar'
+    smplestx_config_path = './third_party/SMPLest-X/pretrained_models/smplest_x_h/config_base.py'
+    smplestx_ckpt_path = './third_party/SMPLest-X/pretrained_models/smplest_x_h/smplest_x_h.pth.tar'
     
     # init config
     cfg = Config.load_config(smplestx_config_path)
@@ -187,7 +187,7 @@ def main():
                             img_width=width, 
                             img_height=height, 
                             input_img_shape=cfg.model.input_img_shape, 
-                            ratio=getattr(cfg.data, "bbox_ratio", 1.25))                
+                            ratio=1.0)
         img, _, _ = generate_patch_image(cvimg=original_img, 
                                             bbox=bbox, 
                                             scale=1.0, 

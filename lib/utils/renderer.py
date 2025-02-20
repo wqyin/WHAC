@@ -120,8 +120,7 @@ class Renderer():
                 raster_settings=RasterizationSettings(
                     image_size=self.image_sizes[0],
                     blur_radius=1e-5,
-                    bin_size=0),
-
+                    max_faces_per_bin=30000),
             ),
             shader=SoftPhongShader(
                 device=self.device,
@@ -175,7 +174,7 @@ class Renderer():
         verts = torch.einsum('bij,bkj->bki', extrinsics[:,:3,:3], verts) + extrinsics[:,:3,3][:,None,:]
         self.cam_geometry = [[verts[i], faces, face_colors] for i in range(extrinsics.shape[0])]
 
-    def set_cam_trajectory(self, id, radius=0.05):
+    def set_cam_trajectory(self, id, radius=0.015):
         points = torch.stack([self.cam_geometry[i][0][4].repeat(42, 1) for i in range(id)])
         ico_sphere_mesh = ico_sphere(level=1, device=self.device)
         verts, faces = ico_sphere_mesh.get_mesh_verts_faces(0)
@@ -188,7 +187,7 @@ class Renderer():
         colors = torch.tensor([[0, 1, 0]]).to('cuda').unsqueeze(1).expand(B, V, -1)[..., :3]
         return verts, faces, colors
 
-    def set_human_trajectory(self, verts_human, radius=0.05):
+    def set_human_trajectory(self, verts_human, radius=0.015):
         points = verts_human[0][4292].repeat(42, 1)
         ico_sphere_mesh = ico_sphere(level=1, device=self.device)
         verts, faces = ico_sphere_mesh.get_mesh_verts_faces(0)
@@ -301,7 +300,6 @@ class Renderer():
         verts = list(torch.unbind(verts, dim=0)) + [gv] + [cv] + self.human_trajectory_verts + list(torch.unbind(ctv, dim=0))
         faces = list(torch.unbind(faces, dim=0)) + [gf] + [cf] + self.human_trajectory_faces + list(torch.unbind(ctf, dim=0))
         colors = list(torch.unbind(colors, dim=0)) + [gc[..., :3]] + [cc[..., :3]] + self.human_trajectory_colors + list(torch.unbind(ctc, dim=0))
-        # import pdb; pdb.set_trace()
         mesh = create_meshes(verts, faces, colors)
 
         materials = Materials(
@@ -341,10 +339,8 @@ def create_meshes(verts, faces, colors):
 
 def get_global_cameras(verts, device, distance=50, position=(-5.0, 5.0, 0.0)):
     positions = torch.tensor([position]).repeat(len(verts), 1)
-    # targets = verts[:, 4292, :] # .mean(1)
-    targets = torch.tensor(uniform_filter1d(verts, size=100, axis=1).mean(axis=1))
-    # import pdb; pdb.set_trace()
-
+    targets = verts.mean(1).mean(0)
+    targets= torch.tensor(targets).repeat(len(verts), 1)
     
     directions = targets - positions
     directions = directions / torch.norm(directions, dim=-1).unsqueeze(-1) * distance
@@ -454,10 +450,10 @@ def camera_marker_geometry(radius, height, up):
     face_colors = torch.tensor(
         [
             [1.0, 1.0, 1.0, 1.0],
+            [1.0, 1.0, 1.0, 1.0],
+            [1.0, 1.0, 1.0, 1.0],
+            [1.0, 1.0, 1.0, 1.0],
             [0.0, 1.0, 0.0, 1.0],
-            [1.0, 0.0, 0.0, 1.0],
-            [0.0, 1.0, 0.0, 1.0],
-            [1.0, 0.0, 0.0, 1.0],
         ]
     , dtype=torch.float32).to('cuda')
     return vertices, faces, face_colors

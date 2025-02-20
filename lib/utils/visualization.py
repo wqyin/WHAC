@@ -34,14 +34,15 @@ def run_vis_on_demo(video, frame_id, world_results, cam_result, focal, pcp_pt, e
         # verts_glob[..., 1] = verts_glob[..., 1] - verts_glob[..., 1].min()
         cx, cz = (verts_glob.mean(1).max(0)[0] + verts_glob.mean(1).min(0)[0])[[0, 2]] / 2.0
         sx, sz = (verts_glob.mean(1).max(0)[0] - verts_glob.mean(1).min(0)[0])[[0, 2]]
-        scale = max(sx.item(), sz.item()) * 1.5
+        scale = max(max(sx.item(), sz.item()) * 1.5, 10)
         
         # set default ground
         renderer.set_ground(scale, cx.item(), cz.item(), offset=offset)
         renderer.set_cam_mesh(extrinsics)
 
         # build global camera
-        global_R, global_T, global_lights = get_global_cameras(verts_glob, 'cuda', distance=10, position=(-scale, scale, 0))
+        global_R, global_T, global_lights = get_global_cameras(verts_glob, 'cuda', 
+                                    distance=scale, position=(-scale*0.8, scale*0.8, 0))
     
     # build default camera
     default_R, default_T = torch.eye(3), torch.zeros(3)

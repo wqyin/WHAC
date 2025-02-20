@@ -24,13 +24,13 @@ cd WHAC
 bash scripts/installation.sh
 ```
 #### **Download the pretrained model for WHAC**
-- Pretrained model will be released soon.
+- Download the `whac_motion_velocimeter.pth.tar` from [here](https://drive.google.com/file/d/1FoDZlElyWLhDNNJhmGfpypvpD3BOR7na/view?usp=sharing) and place it under `./pretrained_models`.
 #### **Setup [SMPLest-X](https://github.com/wqyin/SMPLest-X)**
 - Prepare the pretrained models and parametric human models for SMPLest-X following the official instructions [here](https://github.com/wqyin/SMPLest-X?tab=readme-ov-file#preparation). 
 - Make sure the file structure under `./third_party/SMPLest-X` is correct.
 #### **Setup [DPVO](https://github.com/princeton-vl/DPVO)**
 - Setup steps for DPVO are included in `./scripts/installation.sh`. 
-- Refer to the [Setup and Installation](https://github.com/princeton-vl/DPVO?tab=readme-ov-file#setup-and-installation) section if there is any issue during installation.
+- Refer to the [Setup and Installation](https://github.com/princeton-vl/DPVO?tab=readme-ov-file#setup-and-installation) section if there is any issue during the installation.
 
 #### **File structure**
 ```
@@ -41,7 +41,7 @@ bash scripts/installation.sh
 ├── lib
 ├── outputs
 ├── pretrained_models
-│   └── whac_motion_velocimeter.pth.tar  # will be released soon
+│   └── whac_motion_velocimeter.pth.tar 
 ├── scripts
 ├── third_party
 │   ├── DPVO
